@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #0A1628;
+  color: #CCD6F6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A1628; }
+::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00D4AA; }
+
+/* Grid noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,212,170,0.07) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid lines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(13, 31, 60, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 212, 170, 0.12);
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 212, 170, 0.28);
+}
+
+/* Priority badge glow */
+.glow-critical { box-shadow: 0 0 10px rgba(239,68,68,0.4); }
+.glow-high { box-shadow: 0 0 10px rgba(255,183,3,0.4); }
+.glow-normal { box-shadow: 0 0 10px rgba(0,212,170,0.3); }
+
+/* Action button hover lift */
+.action-btn {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+.action-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* Input focus ring */
+.emc-input {
+  background: rgba(10, 22, 40, 0.8);
+  border: 1px solid rgba(136, 146, 176, 0.2);
+  color: #CCD6F6;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.emc-input:focus {
+  outline: none;
+  border-color: #00D4AA;
+  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.12);
+}
+.emc-input::placeholder { color: rgba(136,146,176,0.5); }
+
+/* Select arrow */
+select.emc-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300D4AA' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+select.emc-input option {
+  background: #0D1F3C;
+  color: #CCD6F6;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  background: rgba(10, 22, 40, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+/* Animated underline */
+.teal-underline {
+  position: relative;
+}
+.teal-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 40px; height: 2px;
+  background: linear-gradient(90deg, #00D4AA, #00E5FF);
+  border-radius: 1px;
+}
+
+/* Dept color chips */
+.dept-chip {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideIn { from{opacity:0;transform:translateX(-16px)} to{opacity:1;transform:translateX(0)} }
+
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+.animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-slide-in { animation: slideIn 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
